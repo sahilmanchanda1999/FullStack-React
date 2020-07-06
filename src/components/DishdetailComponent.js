@@ -25,7 +25,7 @@ class DishDetail extends Component{
                 <div>
                     <li className="mt-4">{com.comment}</li>
                     <li className="mt-4">
-                        -- {com.author}, {com.date}
+                        -- {com.author}, {new Intl.DateTimeFormat('en-US',{year:'numeric',month:'short',day:'2-digit'}).format(new Date(Date.parse(com.date)))}
                     </li>
                 </div>
             );
@@ -45,6 +45,7 @@ class DishDetail extends Component{
             );
         }
         return (
+            <div className="container">
             <div className="row">
                 <div className="col-12 col-md-5 m-1">
                     {this.renderDish(dish)}   
@@ -54,6 +55,7 @@ class DishDetail extends Component{
                 </div>
 
 
+            </div>
             </div>
         );
     }
