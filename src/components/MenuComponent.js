@@ -1,20 +1,22 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import {Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb,BreadcrumbItem} from 'reactstrap';
 
-import {Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
 
 
-
-    function RenderMenuItem({dish, onClick}) {
+    function RenderMenuItem({dish}) {
         
         return (
-                <Card onClick={()=>onClick(dish.id)}>
-
+                <Card>
+                    <Link to={`/menu/${dish.id}`}>
                         <CardImg width="50%" src={dish.image} alt={dish.name}/>
                         <CardImgOverlay>
                             <CardTitle>{dish.name}</CardTitle>
                             
                         </CardImgOverlay>
+                    </Link>
                 </Card>
+                 
         );
     }
    
@@ -22,7 +24,7 @@ import {Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
             const menu= props.dishes.map((dish)=>{
                 return (
                     <div key={dish.id} className="col-12 col-md-5 m-1">
-                        <RenderMenuItem dish={dish} onClick={props.onClick}></RenderMenuItem>
+                        <RenderMenuItem dish={dish} ></RenderMenuItem>
                         {/*<Media tag="li">
                             <Media left middle>
                                 <Media object src={dish.image} alt={dish.name} />
@@ -40,6 +42,20 @@ import {Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
     
             return (
                 <div className="container">
+                    <div className="row">
+                        <Breadcrumb>
+                            <BreadcrumbItem>
+                                <Link to='/home'>Home</Link>
+                            </BreadcrumbItem>
+                            
+                            <BreadcrumbItem active>
+                                Menu
+                            </BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h3>Menu</h3>
+                        </div>
+                    </div>
                     <div className="row">
                         
                             {menu}
