@@ -71,6 +71,7 @@ class Contact extends Component {
         else if (this.state.touched.telnum && telnum.length!==10){
             errors.telnum='telnum should be of 10 digits';
         }
+
         if (this.state.touched.email && email.split('').filter(x=>x==='@').length!==1){
             errors.email='Email should contain a @';
         }
