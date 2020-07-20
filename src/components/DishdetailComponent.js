@@ -19,7 +19,7 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
             </Card>
         );
     }
-    function RenderComments({comments}){
+    function RenderComments({comments,addComment,dishId}){
         const comment=comments.map((com)=>{
             return(
                 <div>
@@ -34,6 +34,7 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
             <div>
               <h4>Comments</h4>
               <ul className="list-unstyled">{comment}</ul>
+              <CommentForm dishId={dishId} addComment={addComment}/>
             </div>
           );
     }
@@ -52,8 +53,8 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
             });
         } 
         handleSubmit(values){
-            console.log("Current state is "+ JSON.stringify(values));
-            alert("Current state is "+ JSON.stringify(values));
+            this.toggleModal();
+            this.props.addComment(this.props.dishId,values.rating,values.author,values.comment);
             
         }
         render(){
@@ -79,14 +80,14 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
                                 </Row>
                                 <Row className="from-group">
                                     <Label htmlFor="name" md={12}>Your Name</Label>
-                                    <Control.text model=".name" className="form-control ml-3 mr-3"
+                                    <Control.text model=".author" className="form-control ml-3 mr-3"
                                         placeholder="Your Name"
-                                        name="name"
+                                        name="author"
                                         validators={{
                                             required, minLength: minLength(3),maxLength:maxLength(15)
                                         }}/>  
                                       <Errors className="text-danger ml-3 mr-3"
-                                        model=".name"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             required: 'Required',
@@ -140,8 +141,11 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
                     <RenderDish dish={props.dish}/>   
                 </div>
                 <div className="col-12 col-md-5 m-1">
-                    <RenderComments comments={props.comments}/>  
-                    <CommentForm/> 
+                    <RenderComments comments={props.comments} 
+                        addComment={props.addComment}
+                        dishId={props.dish.id}  />  
+                    
+
                 </div>
 
 
