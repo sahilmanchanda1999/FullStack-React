@@ -34,7 +34,7 @@ class Header extends Component{
     }
     render(){
         return(
-            /*React Fragment=> can also bhi written as {React.Fragment} */
+            /*React Fragment=> can also be written as {React.Fragment} */
             <>
                 <Navbar dark expand="md">
                 <div className="container">
