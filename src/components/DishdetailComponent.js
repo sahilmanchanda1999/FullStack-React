@@ -22,7 +22,7 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
             </Card>
         );
     }
-    function RenderComments({comments,addComment,dishId}){
+    function RenderComments({comments,postComment,dishId}){
         const comment=comments.map((com)=>{
             return(
                 <div>
@@ -37,7 +37,7 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
             <div>
               <h4>Comments</h4>
               <ul className="list-unstyled">{comment}</ul>
-              <CommentForm dishId={dishId} addComment={addComment}/>
+              <CommentForm dishId={dishId} postComment={postComment}/>
             </div>
           );
     }
@@ -57,7 +57,8 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
         } 
         handleSubmit(values){
             this.toggleModal();
-            this.props.addComment(this.props.dishId,values.rating,values.author,values.comment);
+            alert(this.props.dishId,values.rating,values.author,values.comment);
+            this.props.postComment(this.props.dishId,values.rating,values.author,values.comment);
             
         }
         render(){
@@ -72,7 +73,7 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
                             <LocalForm onSubmit={(values)=>this.handleSubmit(values)}>
                                 <Row className="from-group">
                                     <Label htmlFor="rating" md={12}>Rating</Label>
-                                    <Control.select model=".rating" className="form-control ml-3 mr-3" name="rating">
+                                    <Control.select model=".rating"  className="form-control ml-3 mr-3" name="rating">
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
@@ -85,6 +86,7 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
                                     <Label htmlFor="name" md={12}>Your Name</Label>
                                     <Control.text model=".author" className="form-control ml-3 mr-3"
                                         placeholder="Your Name"
+                                        
                                         name="author"
                                         validators={{
                                             required, minLength: minLength(3),maxLength:maxLength(15)
@@ -102,7 +104,7 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
                                 <Row className="from-group">
                                     <Label htmlFor="comment" md={12}>Comment</Label>
                                     <Control.textarea model=".comment" className="form-control ml-3 mr-3"
-                                        rows="7" name="comment"/>                     
+                                        rows="6"  name="comment"/>                     
                                 </Row>
                                 <Row className="from-group">
                                         <Button type="submit" className="m-3" color="primary">Submit</Button>                
@@ -159,7 +161,7 @@ const minLength= (len) => (val)=> (val) && (val.length>=len);
                     </div>
                     <div className="col-12 col-md-5 m-1">
                         <RenderComments comments={props.comments} 
-                            addComment={props.addComment}
+                            postComment={props.postComment}
                             dishId={props.dish.id}  />  
                         
     
